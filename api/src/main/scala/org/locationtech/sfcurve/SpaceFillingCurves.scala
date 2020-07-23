@@ -2,7 +2,7 @@ package org.locationtech.sfcurve
 
 import java.util.ServiceLoader
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 object SpaceFillingCurves {
 
@@ -10,7 +10,7 @@ object SpaceFillingCurves {
 
   def apply(name: String, args: Map[String, java.io.Serializable]): SpaceFillingCurve2D = {
     val provider =
-      loader.find(_.canProvide(name)).getOrElse(throw new RuntimeException(s"Cannot find provider for type: $name"))
+      loader.asScala.find(_.canProvide(name)).getOrElse(throw new RuntimeException(s"Cannot find provider for type: $name"))
     provider.build2DSFC(args)
   }
 

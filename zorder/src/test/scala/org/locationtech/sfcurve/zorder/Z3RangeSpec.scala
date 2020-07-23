@@ -1,8 +1,11 @@
 package org.locationtech.sfcurve.zorder
 
-import org.scalatest._
+import org.scalatest.compatible.Assertion
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.should.Matchers
 
-class Z3RangeSpec extends FunSpec with Matchers {
+
+class Z3RangeSpec extends AnyFunSpec with Matchers {
 
   describe("Z3Range") {
 
@@ -19,7 +22,7 @@ class Z3RangeSpec extends FunSpec with Matchers {
 
     it("for uncuttable ranges") {
       val range = ZRange(zmin, zmin)
-      Z3.cut(range, Z3(0, 0, 0).z, inRange = false) shouldBe empty
+      Z3.cut(range, Z3(0, 0, 0).z, inRange = false).size shouldBe 0
     }
     it("for out of range zs")  {
       val zcut = Z3(5, 1, 0).z
